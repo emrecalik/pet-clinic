@@ -1,19 +1,19 @@
 package com.edoras.petclinic.service.map;
 
 import com.edoras.petclinic.model.Vet;
-import com.edoras.petclinic.service.CrudService;
+import com.edoras.petclinic.service.VetService;
 
 import java.util.Set;
 
-public class VetServiceMap extends AbstractServiceMap<Vet, Long> implements CrudService<Vet, Long> {
+public class VetServiceMap extends AbstractServiceMap<Vet, Long> implements VetService {
     @Override
     public Vet findById(Long id) {
         return super.findById(id);
     }
 
     @Override
-    public Vet save(Long id, Vet object) {
-        return super.save(id, object);
+    public Vet save(Vet object) {
+        return super.save(object.getId(), object);
     }
 
     @Override

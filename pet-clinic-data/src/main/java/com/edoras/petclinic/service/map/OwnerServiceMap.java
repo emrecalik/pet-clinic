@@ -1,19 +1,19 @@
 package com.edoras.petclinic.service.map;
 
 import com.edoras.petclinic.model.Owner;
-import com.edoras.petclinic.service.CrudService;
+import com.edoras.petclinic.service.OwnerService;
 
 import java.util.Set;
 
-public class OwnerServiceMap extends AbstractServiceMap<Owner, Long> implements CrudService<Owner, Long> {
+public class OwnerServiceMap extends AbstractServiceMap<Owner, Long> implements OwnerService {
     @Override
     public Owner findById(Long id) {
         return super.findById(id);
     }
 
     @Override
-    public Owner save(Long id, Owner object) {
-        return super.save(id, object);
+    public Owner save(Owner object) {
+        return super.save(object.getId(), object);
     }
 
     @Override
@@ -29,5 +29,10 @@ public class OwnerServiceMap extends AbstractServiceMap<Owner, Long> implements 
     @Override
     public void deleteById(Long id) {
         super.deleteById(id);
+    }
+
+    @Override
+    public Owner findByLastName(String lastName) {
+        return null;
     }
 }
