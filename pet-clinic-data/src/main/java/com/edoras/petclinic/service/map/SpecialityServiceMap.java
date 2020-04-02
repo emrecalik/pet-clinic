@@ -2,9 +2,11 @@ package com.edoras.petclinic.service.map;
 
 import com.edoras.petclinic.model.Speciality;
 import com.edoras.petclinic.service.SpecialityService;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
+@Service
 public class SpecialityServiceMap extends AbstractServiceMap<Speciality, Long> implements SpecialityService {
     @Override
     public Speciality findById(Long id) {
