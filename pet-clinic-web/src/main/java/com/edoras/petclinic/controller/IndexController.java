@@ -10,4 +10,9 @@ public class IndexController {
     public String showIndexPage() {
         return "index";
     }
+
+    @RequestMapping("/oups")
+    public String showErrorPage() {
+        return "notImplemented";
+    }
 }
