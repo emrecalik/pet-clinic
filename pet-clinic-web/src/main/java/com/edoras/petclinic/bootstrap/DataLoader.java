@@ -1,9 +1,6 @@
 package com.edoras.petclinic.bootstrap;
 
-import com.edoras.petclinic.model.Owner;
-import com.edoras.petclinic.model.Pet;
-import com.edoras.petclinic.model.PetType;
-import com.edoras.petclinic.model.Vet;
+import com.edoras.petclinic.model.*;
 import com.edoras.petclinic.service.OwnerService;
 import com.edoras.petclinic.service.PetService;
 import com.edoras.petclinic.service.PetTypeService;
@@ -77,11 +74,21 @@ public class DataLoader implements CommandLineRunner {
         Vet vet1 = new Vet();
         vet1.setFirstName("İdil");
         vet1.setLastName("İşçi");
+
+        Speciality dentistry = new Speciality();
+        dentistry.setDescription("Denstistry");
+        vet1.getSpecialities().add(dentistry);
+
         vetService.save(vet1);
 
         Vet vet2 = new Vet();
         vet2.setFirstName("Yusuf");
         vet2.setLastName("Gökyer");
+
+        Speciality surgery = new Speciality();
+        surgery.setDescription("Surgery");
+        vet2.getSpecialities().add(surgery);
+
         vetService.save(vet2);
 
         System.out.println("Vets have been loaded..");

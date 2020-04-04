@@ -1,6 +1,8 @@
 package com.edoras.petclinic.service.map;
 
 import com.edoras.petclinic.model.Owner;
+import com.edoras.petclinic.model.Pet;
+import com.edoras.petclinic.model.PetType;
 import com.edoras.petclinic.service.OwnerService;
 import com.edoras.petclinic.service.PetService;
 import com.edoras.petclinic.service.PetTypeService;
@@ -31,14 +33,16 @@ public class OwnerServiceMap extends AbstractServiceMap<Owner, Long> implements 
                 object.getPets().forEach(pet -> {
                     if (pet.getPetType() != null) {
                         if (pet.getPetType().getId() == null) {
-                            petTypeService.save(pet.getPetType());
+                            PetType savedPetType = petTypeService.save(pet.getPetType());
+                            pet.getPetType().setId(savedPetType.getId());
                         }
                     } else {
                         throw new RuntimeException("Pet Type is not defined");
                     }
 
                     if (pet.getId() == null) {
-                        petService.save(pet);
+                        Pet savedPet = petService.save(pet);
+                        pet.setId(savedPet.getId());
                     }
                 });
             }

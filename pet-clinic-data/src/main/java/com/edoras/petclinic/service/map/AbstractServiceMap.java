@@ -12,7 +12,15 @@ public abstract class AbstractServiceMap<T extends BaseEntity, ID> {
     }
 
     T save(T object) {
-        return map.put(generateId(object), object);
+        if (object != null) {
+            if (object.getId() == null) {
+                object.setId(generateId(object));
+            }
+            map.put(object.getId(), object);
+            return object;
+        } else {
+            throw new RuntimeException("Object can not be null");
+        }
     }
 
     Set<T> findAll() {
