@@ -4,7 +4,7 @@ import com.edoras.petclinic.model.BaseEntity;
 
 import java.util.*;
 
-public abstract class AbstractServiceMap<T extends BaseEntity, ID> {
+public abstract class AbstractMapService<T extends BaseEntity, ID> {
     protected Map<Long, T> map = new HashMap<>();
 
     T findById(ID id) {

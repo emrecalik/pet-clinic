@@ -1,31 +1,30 @@
 package com.edoras.petclinic.service.map;
 
-import com.edoras.petclinic.model.Pet;
-import com.edoras.petclinic.service.PetService;
+import com.edoras.petclinic.model.Speciality;
+import com.edoras.petclinic.service.SpecialityService;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
 @Service
-public class PetServiceMap extends AbstractServiceMap<Pet, Long> implements PetService {
-
+public class SpecialityMapService extends AbstractMapService<Speciality, Long> implements SpecialityService {
     @Override
-    public Pet findById(Long id) {
+    public Speciality findById(Long id) {
         return super.findById(id);
     }
 
     @Override
-    public Pet save(Pet object) {
+    public Speciality save(Speciality object) {
         return super.save(object);
     }
 
     @Override
-    public Set<Pet> findAll() {
+    public Set<Speciality> findAll() {
         return super.findAll();
     }
 
     @Override
-    public void delete(Pet object) {
+    public void delete(Speciality object) {
         super.delete(object);
     }
 
