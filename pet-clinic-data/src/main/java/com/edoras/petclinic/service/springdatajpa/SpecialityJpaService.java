@@ -3,12 +3,14 @@ package com.edoras.petclinic.service.springdatajpa;
 import com.edoras.petclinic.model.Speciality;
 import com.edoras.petclinic.repository.SpecialityRepository;
 import com.edoras.petclinic.service.SpecialityService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Service
+@Profile("springdatajpa")
 public class SpecialityJpaService implements SpecialityService {
 
     private final SpecialityRepository specialityRepository;

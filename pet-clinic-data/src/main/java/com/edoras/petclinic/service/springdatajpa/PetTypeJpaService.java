@@ -3,12 +3,14 @@ package com.edoras.petclinic.service.springdatajpa;
 import com.edoras.petclinic.model.PetType;
 import com.edoras.petclinic.repository.PetTypeRepository;
 import com.edoras.petclinic.service.PetTypeService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Service
+@Profile("springdatajpa")
 public class PetTypeJpaService implements PetTypeService {
     private final PetTypeRepository petTypeRepository;
 
@@ -27,6 +29,7 @@ public class PetTypeJpaService implements PetTypeService {
     }
 
     @Override
+    @Profile("springdatajpa")
     public Set<PetType> findAll() {
         Set<PetType> petTypes = new HashSet<>();
         petTypeRepository.findAll().forEach(petTypes::add);

@@ -2,9 +2,9 @@ package com.edoras.petclinic.bootstrap;
 
 import com.edoras.petclinic.model.*;
 import com.edoras.petclinic.service.OwnerService;
-import com.edoras.petclinic.service.PetService;
 import com.edoras.petclinic.service.PetTypeService;
 import com.edoras.petclinic.service.VetService;
+import com.edoras.petclinic.service.VisitService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -16,11 +16,14 @@ public class DataLoader implements CommandLineRunner {
     private final OwnerService ownerService;
     private final VetService vetService;
     private final PetTypeService petTypeService;
+    private final VisitService visitService;
 
-    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, PetService petService) {
+    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService,
+                      VisitService visitService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
+        this.visitService = visitService;
     }
 
     @Override
@@ -52,6 +55,14 @@ public class DataLoader implements CommandLineRunner {
         emresPet.setName("Tony");
 
         ownerService.save(owner1);
+
+//        Visit emresPetVisit = new Visit();
+//        emresPetVisit.setDate(LocalDate.now());
+//        emresPetVisit.setDescription("Good old boy");
+//        emresPetVisit.setPet(emresPet);
+//        visitService.save(emresPetVisit);
+//
+//        emresPet.getVisits().add(emresPetVisit);
 
         Owner owner2 = new Owner();
         owner2.setFirstName("Kaan");

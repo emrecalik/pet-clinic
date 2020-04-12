@@ -3,12 +3,14 @@ package com.edoras.petclinic.service.springdatajpa;
 import com.edoras.petclinic.model.Pet;
 import com.edoras.petclinic.repository.PetRepository;
 import com.edoras.petclinic.service.PetService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Service
+@Profile("springdatajpa")
 public class PetJpaService implements PetService {
 
     private final PetRepository petRepository;
