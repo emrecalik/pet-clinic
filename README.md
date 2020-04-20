@@ -1,4 +1,5 @@
-[![CircleCI](https://circleci.com/gh/emrecalik/pet-clinic.svg?style=svg)](https://circleci.com/gh/emrecalik/pet-clinic)
+[![CircleCI](https://circleci.com/gh/emrecalik/pet-clinic.svg?style=svg&circle-token=5bfe51bb322f29bf32ef6a0069e42dabcac5f9bc)](https://circleci.com/gh/emrecalik/pet-clinic)
 
-# pet-clinic
-Java Spring Pet Clinic Project
+# Java Spring Pet Clinic Project
+
+This is a personal repo for training purpose.
