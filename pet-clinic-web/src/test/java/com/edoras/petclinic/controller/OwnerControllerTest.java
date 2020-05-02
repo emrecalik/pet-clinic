@@ -11,10 +11,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
-import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -46,19 +47,50 @@ class OwnerControllerTest {
     }
 
     @Test
-    void listOwners() throws Exception {
-        when(ownerService.findAll()).thenReturn(ownerSet);
+    void searchListOwners() throws Exception {
+        Owner owner1 = new Owner();
+        Owner owner2 = new Owner();
 
-        mockMvc.perform(get("/owners/"))
+        List<Owner> ownerList = new ArrayList<>();
+        ownerList.add(owner1);
+        ownerList.add(owner2);
+
+        when(ownerService.findAllByLastNameLike(any())).thenReturn(ownerList);
+
+        mockMvc.perform(get("/owners"))
                 .andExpect(status().isOk())
-                .andExpect(model().attribute("owners", hasSize(2)))
-                .andExpect(view().name("owner/index"));
+                .andExpect(model().attributeExists("selections"))
+                .andExpect(view().name("owner/owners-list"));
+    }
+
+    @Test
+    void searchAndFindNoOwner() throws Exception {
+        when(ownerService.findAllByLastNameLike(any())).thenReturn(new ArrayList<>());
+
+        mockMvc.perform(get("/owners"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/owners/find"));
+    }
+
+    @Test
+    void searchAndFindOneOwner() throws Exception {
+        Owner owner = new Owner();
+        owner.setId(1L);
+        List<Owner> ownerList = new ArrayList<>();
+        ownerList.add(owner);
+
+        when(ownerService.findAllByLastNameLike(any())).thenReturn(ownerList);
+
+        mockMvc.perform(get("/owners"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/owners/1"));
     }
 
     @Test
     void findOwners() throws Exception {
         mockMvc.perform(get("/owners/find"))
-                .andExpect(view().name("notImplemented"));
+                .andExpect(view().name("owner/find-owners"))
+                .andExpect(model().attributeExists("owner"));
 
         verifyNoInteractions(ownerService);
     }

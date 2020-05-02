@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/owners")
 public class OwnerController {
@@ -17,15 +19,29 @@ public class OwnerController {
         this.ownerService = ownerService;
     }
 
-    @GetMapping({"", "/", "index", "index.html"})
-    public String listOwners(Model model) {
-        model.addAttribute("owners", ownerService.findAll());
-        return "owner/index";
+    @GetMapping
+    public String searchOwners(Owner owner, Model model) {
+
+        if (owner.getLastName() == null) {
+            owner.setLastName("");
+        }
+
+        List<Owner> ownerList = ownerService.findAllByLastNameLike("%" + owner.getLastName() + "%");
+        model.addAttribute("selections", ownerList);
+
+        if (ownerList.size() == 0) {
+            return "redirect:/owners/find";
+        } else if (ownerList.size() == 1) {
+            return "redirect:/owners/" + ownerList.get(0).getId();
+        } else {
+            return "owner/owners-list";
+        }
     }
 
     @GetMapping("/find")
-    public String findOwners() {
-        return "notImplemented";
+    public String findOwners(Model model) {
+        model.addAttribute("owner", Owner.builder().build());
+        return "owner/find-owners";
     }
 
     @GetMapping("/{ownerId}")
