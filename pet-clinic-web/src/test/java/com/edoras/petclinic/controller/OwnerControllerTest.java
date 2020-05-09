@@ -11,11 +11,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
+import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -88,6 +86,17 @@ class OwnerControllerTest {
     }
 
     @Test
+    void searchAndFindManyOwner() throws Exception {
+        when(ownerService.findAllByLastNameLike(any())).thenReturn(Arrays.asList(Owner.builder().id(1L).build()
+                , Owner.builder().id(2L).build()));
+
+        mockMvc.perform(get("/owners"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("owner/owners-list"))
+                .andExpect(model().attribute("selections", hasSize(2)));
+    }
+
+    @Test
     void findOwners() throws Exception {
         mockMvc.perform(get("/owners/find"))
                 .andExpect(view().name("owner/find-owners"))
@@ -156,6 +165,5 @@ class OwnerControllerTest {
 
         verify(ownerService, times(1)).save(any());
     }
-
 
 }

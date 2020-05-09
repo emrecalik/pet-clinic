@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -53,7 +54,10 @@ class VisitControllerTest {
 
     @Test
     void createVisitFormProcess() throws Exception {
-        mockMvc.perform(post(VISIT_URL))
+        mockMvc.perform(post(VISIT_URL)
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                        .param("date", "2015-05-10")
+                        .param("description", "Dummy Description"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name(REDIRECT_URL))
                 .andExpect(model().attributeExists("pet"));
