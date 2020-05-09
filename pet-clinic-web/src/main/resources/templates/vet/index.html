@@ -8,15 +8,17 @@
         <h2 th:text="'List of Vets'">Test</h2>
         <table class="table table-striped">
             <thead>
-                <th>ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
+                <th>Name</th>
+                <th>Specialties</th>
             </thead>
             <tbody>
                 <tr th:each="vet : ${vets}">
-                    <td th:text="${vet.getId()}"></td>
-                    <td th:text="${vet.getFirstName()}"></td>
-                    <td th:text="${vet.getLastName()}"></td>
+                    <td th:text="${vet.getFirstName() + ' ' + vet.getLastName()}"></td>
+                    <td>
+                        <span th:each="specialty : ${vet.getSpecialities()}" th:text="${specialty.getDescription() + ' '}">
+                        </span>
+                        <span th:if="${vet.getSpecialities().size() == 0}">None</span>
+                    </td>
                 </tr>
             </tbody>
         </table>

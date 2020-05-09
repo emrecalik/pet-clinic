@@ -100,6 +100,10 @@ public class DataLoader implements CommandLineRunner {
         surgery.setDescription("Surgery");
         vet2.getSpecialities().add(surgery);
 
+        Speciality skin = new Speciality();
+        skin.setDescription("Skin");
+        vet2.getSpecialities().add(skin);
+
         vetService.save(vet2);
 
         System.out.println("Vets have been loaded..");
