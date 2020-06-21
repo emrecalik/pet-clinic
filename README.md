@@ -2,4 +2,4 @@
 
 # Java Spring Pet Clinic Project
 
-This is a personal repo for training purpose.
+This is a personal repo to develop a sample application built in Spring Framework 5.
